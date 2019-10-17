@@ -4,6 +4,7 @@ class GildedRose {
     public static final String AGED_BRIE = "Aged Brie";
     public static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
     public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
+    public static final String DEXTERITY = "+5 Dexterity Vest";
 
     Item[] items;
 
@@ -19,17 +20,13 @@ class GildedRose {
 
     private void process(Item item) {
         if (!SULFURAS.equals(item.name)) {
-            item.sellIn = item.sellIn - 1;
+            item.sellIn--;
         }
 
-        if (!AGED_BRIE.equals(item.name) && !BACKSTAGE_PASSES.equals(item.name)) {
-            if (!SULFURAS.equals(item.name) && item.quality > 0) {
-                item.quality = item.quality - 1;
-            }
+        if (DEXTERITY.equals(item.name) && item.quality > 0) {
+            item.quality--;
         } else {
             if (item.quality < 50) {
-                item.quality = item.quality + 1;
-
                 this.processBackstagePasses(item);
             }
         }
@@ -38,13 +35,15 @@ class GildedRose {
     }
 
     private void processBackstagePasses(Item item) {
+        item.quality++;// = item.quality + 1;
+
         if (BACKSTAGE_PASSES.equals(item.name)) {
             if (item.sellIn < 11 && item.quality < 50) {
-                item.quality = item.quality + 1;
+                item.quality++;
             }
 
             if (item.sellIn < 6 && item.quality < 50) {
-                item.quality = item.quality + 1;
+                item.quality++;
             }
         }
     }
@@ -55,15 +54,15 @@ class GildedRose {
                 this.processNoBackstagePassesNegative(item);
             } else {
                 if (item.quality < 50) {
-                    item.quality = item.quality + 1;
+                    item.quality++;
                 }
             }
         }
     }
 
     private void processNoBackstagePassesNegative(Item item) {
-        if (item.quality > 0 && !BACKSTAGE_PASSES.equals(item.name) && !SULFURAS.equals(item.name)) {
-            item.quality = item.quality - 1;
+        if (item.quality > 0 && (DEXTERITY.equals(item.name) || AGED_BRIE.equals(item.name))) {
+            item.quality--;
         } else {
             item.quality = 0;
         }

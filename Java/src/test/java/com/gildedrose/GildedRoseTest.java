@@ -2,6 +2,10 @@ package com.gildedrose;
 
 import org.junit.Test;
 
+import static com.gildedrose.GildedRose.AGED_BRIE;
+import static com.gildedrose.GildedRose.BACKSTAGE_PASSES;
+import static com.gildedrose.GildedRose.DEXTERITY;
+import static com.gildedrose.GildedRose.SULFURAS;
 import static org.junit.Assert.assertEquals;
 
 public class GildedRoseTest {
@@ -17,7 +21,7 @@ public class GildedRoseTest {
 
     @Test
     public void testDecreaseQualityTwiceIfSellByDateIsPassed() {
-        Item[] items = new Item[] {new Item("+5 Dexterity Vest", 0, 20)};
+        Item[] items = new Item[] {new Item(DEXTERITY, 0, 20)};
         GildedRose app = new GildedRose(items);
 
         app.updateQuality();
@@ -29,7 +33,7 @@ public class GildedRoseTest {
 
     @Test
     public void testQualityOfItemShouldNotBeNegative() {
-        Item[] items = new Item[] {new Item("+5 Dexterity Vest", 0, 0)};
+        Item[] items = new Item[] {new Item(DEXTERITY, 0, 0)};
         GildedRose app = new GildedRose(items);
 
         app.updateQuality();
@@ -41,7 +45,7 @@ public class GildedRoseTest {
 
     @Test
     public void testIncreaseQualityOfAgedBrieOlderItGets() {
-        Item[] items = new Item[] {new Item("Aged Brie", 2, 0)};
+        Item[] items = new Item[] {new Item(AGED_BRIE, 2, 0)};
         GildedRose app = new GildedRose(items);
 
         app.updateQuality();
@@ -55,8 +59,8 @@ public class GildedRoseTest {
     @Test
     public void testAllowQualityMoreThan50ForLegendaryItemsSulfuras() {
         Item[] items = new Item[] {
-                new Item("Aged Brie", 2, 50),
-                new Item("Sulfuras, Hand of Ragnaros", 0, 80)
+                new Item(AGED_BRIE, 2, 50),
+                new Item(SULFURAS, 0, 80)
         };
 
         GildedRose app = new GildedRose(items);
@@ -74,7 +78,7 @@ public class GildedRoseTest {
 
     @Test
     public void testNotIncreaseOrDecreaseLegendaryItemQualityAndItIsNotToBeSoldSulfuras() {
-        Item[] items = new Item[] {new Item("Sulfuras, Hand of Ragnaros", 0, 80)};
+        Item[] items = new Item[] {new Item(SULFURAS, 0, 80)};
         GildedRose app = new GildedRose(items);
 
         app.updateQuality();
@@ -86,7 +90,7 @@ public class GildedRoseTest {
 
     @Test
     public void testIncreaseInQualityByOneIfMoreThanTenDaysBackstagePasses() {
-        Item[] items = new Item[] {new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20)};
+        Item[] items = new Item[] {new Item(BACKSTAGE_PASSES, 15, 20)};
         GildedRose app = new GildedRose(items);
 
         app.updateQuality();
@@ -98,7 +102,7 @@ public class GildedRoseTest {
 
     @Test
     public void testIncreaseInQualityBytwoIfLessThanOrEqualToTenDaysBackstagePasses() {
-        Item[] items = new Item[] {new Item("Backstage passes to a TAFKAL80ETC concert", 10, 20)};
+        Item[] items = new Item[] {new Item(BACKSTAGE_PASSES, 10, 20)};
         GildedRose app = new GildedRose(items);
 
         app.updateQuality();
@@ -110,7 +114,7 @@ public class GildedRoseTest {
 
     @Test
     public void testIncreaseInQualityByThreeIfLessThanOrEqualToFiveDaysBackstagePasses() {
-        Item[] items = new Item[] {new Item("Backstage passes to a TAFKAL80ETC concert", 5, 20)};
+        Item[] items = new Item[] {new Item(BACKSTAGE_PASSES, 5, 20)};
         GildedRose app = new GildedRose(items);
 
         app.updateQuality();
@@ -122,7 +126,7 @@ public class GildedRoseTest {
 
     @Test
     public void testZeroTheQualityAfterSellInDateBackstagePasses() {
-        Item[] items = new Item[] {new Item("Backstage passes to a TAFKAL80ETC concert", 0, 20)};
+        Item[] items = new Item[] {new Item(BACKSTAGE_PASSES, 0, 20)};
         GildedRose app = new GildedRose(items);
 
         app.updateQuality();
