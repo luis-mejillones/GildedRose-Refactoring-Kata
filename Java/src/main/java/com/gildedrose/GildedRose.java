@@ -35,14 +35,14 @@ class GildedRose {
     }
 
     private void processBackstagePasses(Item item) {
-        item.quality++;// = item.quality + 1;
+        item.quality++;
 
         if (BACKSTAGE_PASSES.equals(item.name)) {
-            if (item.sellIn < 11 && item.quality < 50) {
+            if (item.sellIn < 11) {
                 item.quality++;
             }
 
-            if (item.sellIn < 6 && item.quality < 50) {
+            if (item.sellIn < 6) {
                 item.quality++;
             }
         }
@@ -53,9 +53,7 @@ class GildedRose {
             if (!AGED_BRIE.equals(item.name)) {
                 this.processNoBackstagePassesNegative(item);
             } else {
-                if (item.quality < 50) {
-                    item.quality++;
-                }
+                item.quality++;
             }
         }
     }

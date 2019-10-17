@@ -135,4 +135,18 @@ public class GildedRoseTest {
         assertEquals(-1, item.sellIn);
         assertEquals(0, item.quality);
     }
+
+    @Test
+    public void testAgedBrieNotLooseQuality() {
+        Item[] items = new Item[] {new Item(AGED_BRIE, 100, 100)};
+        GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+        Item item = app.items[0];
+
+        assertEquals(99, item.sellIn);
+        assertEquals(100, item.quality);
+
+    }
+
 }
